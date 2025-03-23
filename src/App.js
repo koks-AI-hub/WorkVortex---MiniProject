@@ -7,7 +7,6 @@ import AuthPage from "./pages/AuthPage";
 import EmployeeDashboard from "./pages/EmployeeDashboard";
 import CompanyDashboard from "./pages/CompanyDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-
 function App() {
   return (
     <Router>
@@ -19,7 +18,7 @@ function App() {
       <Route path="/login" element={<AuthPage type="login" />} />
       <Route path="/company-register" element={<AuthPage type="register" />} />
       <Route 
-        path="/dashboard" 
+        path="/dashboard/*" 
         element={<ProtectedRoute allowedRoles={["employee"]}><EmployeeDashboard /></ProtectedRoute>} 
       />
     

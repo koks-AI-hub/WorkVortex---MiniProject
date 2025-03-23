@@ -54,6 +54,5 @@ This project is deployed using Firebase Hosting. To deploy:
 2. Deploy to Firebase:
     ```bash
     firebase deploy
-    
 
 

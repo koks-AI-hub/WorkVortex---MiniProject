@@ -1,7 +1,7 @@
 /* 🌙 Dark Glassmorphism Dashboard */
 .employee-dashboard {
     display: flex;
-    height: 100vh;
+    height: 100%;
     background: linear-gradient(135deg, #121212, #1e1e1e);
 }
 

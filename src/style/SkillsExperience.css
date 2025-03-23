@@ -1,0 +1,206 @@
+/* Container */
+.skills-experience-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: white;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Headings */
+.skills-experience-container h2,
+.skills-experience-container h3 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Skills Section */
+.skills-section {
+    margin-bottom: 20px;
+}
+
+.skills-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.skills-input input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.skills-input button {
+    padding: 10px 15px;
+    border: none;
+    background: #e53935;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.skills-input button:hover {
+    background: #d32f2f;
+}
+
+/* Skill Badges */
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.skill-badge button {
+    margin-left: 8px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Experience Section */
+.experience-section {
+    margin-top: 20px;
+}
+
+.add-experience-btn {
+    background: #3a86ff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.add-experience-btn:hover {
+    background: #2563eb;
+}
+
+/* Experience Table */
+.experience-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.experience-table th, .experience-table td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.experience-table th {
+    background: rgba(255, 255, 255, 0.1);
+    font-weight: bold;
+}
+
+.experience-table td {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* No Data Placeholder */
+.no-data {
+    padding: 15px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Modal Popup */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 12px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h3 {
+    margin-bottom: 15px;
+}
+
+.modal-content input, .modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.modal-actions button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.modal-actions button:first-child {
+    background: #3a86ff;
+    color: white;
+}
+
+.modal-actions button:first-child:hover {
+    background: #2563eb;
+}
+
+.modal-actions .close-btn {
+    background: #e53935;
+    color: white;
+}
+
+.modal-actions .close-btn:hover {
+    background: #d32f2f;
+}

@@ -1,18 +1,19 @@
 /* 🌙 Glassmorphism Sidebar */
 .sidebar {
-    background: rgba(18, 18, 18, 0.7); /* Transparent effect */
+    background: rgba(18, 18, 18, 0.9); /* Transparent effect */
     backdrop-filter: blur(12px);
     width: 250px;
     height: 100vh;
     position: fixed;
     left: 0;
     top: 0;
-    padding: 25px 15px;
+    padding: 20px 15px;
     box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease-in-out;
     overflow: hidden;
+    z-index: 1000;
 }
 
 /* 📌 Collapsed Sidebar */
@@ -21,6 +22,9 @@
     padding: 20px 10px;
 }
 
+.sidebar.open .toggle-btn {
+    display: none;
+}
 /* 🔹 Logo */
 .logo {
     font-size: 20px;
@@ -44,10 +48,13 @@
     margin: 0;
 }
 
+.sidebar.collapsed .sidebar-menu {
+    margin-top: 50px;
+}
 .menu-item {
     text-decoration: none;
     color: white;
-    font-size: 18px;
+    font-size: 16px;
     padding: 12px 15px;
     display: flex;
     align-items: center;
@@ -74,6 +81,14 @@
     display: none;
 }
 
+/* 🌟 Active Tab */
+.sidebar-menu li.active .menu-item {
+    background: rgba(26, 188, 156, 0.8); /* Highlight active tab */
+    color: white;
+    font-weight: bold;
+    transform: translateX(0);
+}
+
 /* 🚀 Logout Button */
 .logout {
     color: #ff4b4b;
@@ -83,7 +98,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 8px;
     transition: all 0.3s ease-in-out;
 }
@@ -97,7 +112,7 @@
 .toggle-btn {
     position: absolute;
     top: 15px;
-    right: -35px;
+    right: 30px;
     background: #e53935;
     color: white;
     border: none;

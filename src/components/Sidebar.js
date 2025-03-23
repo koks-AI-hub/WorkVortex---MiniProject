@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { 
   FaBars, FaTimes, FaUser, FaBriefcase, FaSearch, FaSignOutAlt 
 } from "react-icons/fa";
@@ -9,7 +9,9 @@ import "../style/Sidebar.css";
 
 const Sidebar = ({ userType }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const location = useLocation();
   const navigate = useNavigate();
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -26,6 +28,8 @@ const Sidebar = ({ userType }) => {
     }
   };
 
+  const isActive = (path) => location.pathname === path; // Check if the tab is active
+
   return (
     <div className={`sidebar ${isOpen ? "open" : "collapsed"}`}>
       <div className="sidebar-header">
@@ -35,17 +39,62 @@ const Sidebar = ({ userType }) => {
         </button>
       </div>
       <ul className="sidebar-menu">
-        <li><Link to="profile" className="menu-item"><FaUser /><span>{isOpen && "Profile"}</span></Link></li>
+        <li className={isActive("/dashboard/profile") ? "active" : ""}>
+          <Link 
+            to="/dashboard/profile" 
+            className="menu-item" 
+            onClick={() => setIsOpen(false)} 
+          >
+            <FaUser />
+            <span>{isOpen && "Profile"}</span>
+          </Link>
+        </li>
         
         {userType === "Employee" ? (
           <>
-            <li><Link to="jobs" className="menu-item"><FaBriefcase /><span>{isOpen && "Job Feed"}</span></Link></li>
-            <li><Link to="applications" className="menu-item"><FaBriefcase /><span>{isOpen && "Applications"}</span></Link></li>
+            <li className={isActive("/dashboard/jobs") ? "active" : ""}>
+              <Link 
+                to="/dashboard/jobs" 
+                className="menu-item" 
+                onClick={() => setIsOpen(false)} // Close sidebar on tab click
+              >
+                <FaBriefcase />
+                <span>{isOpen && "Job Feed"}</span>
+              </Link>
+            </li>
+            <li className={isActive("/dashboard/applications") ? "active" : ""}>
+              <Link 
+                to="/dashboard/applications" 
+                className="menu-item" 
+                onClick={() => setIsOpen(false)} // Close sidebar on tab click
+              >
+                <FaBriefcase />
+                <span>{isOpen && "Applications"}</span>
+              </Link>
+            </li>
           </>
         ) : (
           <>
-            <li><Link to="post-job" className="menu-item"><FaBriefcase /><span>{isOpen && "Post Job"}</span></Link></li>
-            <li><Link to="search-workers" className="menu-item"><FaSearch /><span>{isOpen && "Search Workers"}</span></Link></li>
+            <li className={isActive("/dashboard/post-job") ? "active" : ""}>
+              <Link 
+                to="/company-dashboard/post-job" 
+                className="menu-item" 
+                onClick={() => setIsOpen(false)} // Close sidebar on tab click
+              >
+                <FaBriefcase />
+                <span>{isOpen && "Post Job"}</span>
+              </Link>
+            </li>
+            <li className={isActive("/dashboard/search-workers") ? "active" : ""}>
+              <Link 
+                to="/company-dashboard/search-workers" 
+                className="menu-item" 
+                onClick={() => setIsOpen(false)}
+              >
+                <FaSearch />
+                <span>{isOpen && "Search Workers"}</span>
+              </Link>
+            </li>
           </>
         )}
 

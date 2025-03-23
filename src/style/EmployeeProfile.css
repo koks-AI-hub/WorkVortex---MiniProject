@@ -1,0 +1,119 @@
+.profile-container {
+    background: rgba(18, 18, 18, 0.6); /* Glassmorphism */
+    backdrop-filter: blur(15px);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 700px;
+    margin: 40px auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    height: auto;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tabs button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-bottom: 2px solid transparent;
+}
+
+.tabs button.active {
+    border-bottom: 2px solid #e53935;
+    font-weight: bold;
+}
+
+.tab-content {
+    margin-top: 20px;
+}
+
+.tab-panel {
+    text-align: left;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.profile-pic-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e53935;
+    cursor: pointer;
+}
+
+#profilePicUpload {
+    display: none;
+}
+
+.info-section {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.save-btn {
+    background: linear-gradient(135deg, #e53935, #d32f2f);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.save-btn:hover {
+    background: linear-gradient(135deg, #d32f2f, #e53935);
+    transform: scale(1.05);
+}
