@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SplashScreen from "./pages/SplashScreen";
+import LandingPage from "./pages/LandingPage";
+import Unauthorized from "./components/Unauthorized";
+import NotFound from "./components/NotFound";
+import AuthPage from "./pages/AuthPage";
+import EmployeeDashboard from "./pages/EmployeeDashboard";
+import CompanyDashboard from "./pages/CompanyDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+       <Route path="/" element={<SplashScreen />} />
+      <Route path="/landing" element={<LandingPage />} />
+      <Route path="/unauthorized" element={<Unauthorized />} />    
+      <Route path="/register" element={<AuthPage type="register" />} />
+      <Route path="/login" element={<AuthPage type="login" />} />
+      <Route path="/company-register" element={<AuthPage type="register" />} />
+      <Route 
+        path="/dashboard" 
+        element={<ProtectedRoute allowedRoles={["employee"]}><EmployeeDashboard /></ProtectedRoute>} 
+      />
+    
+      <Route 
+        path="/company-dashboard" 
+        element={<ProtectedRoute allowedRoles={["company"]}><CompanyDashboard /></ProtectedRoute>} 
+      />
+
+        <Route path="*" element={<NotFound/>} />
+      </Routes>
+    </Router>
   );
 }
 
