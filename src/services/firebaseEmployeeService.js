@@ -36,6 +36,34 @@ export const uploadProfilePicToSupabase = async (employeeId, file) => {
 };
 
 /**
+ * Upload a document to Supabase and return the download URL.
+ * @param {string} employeeId - Unique ID for the employee.
+ * @param {File} file - Document file to upload.
+ * @param {string} customName - Custom name for the document.
+ * @returns {string} - Download URL of the uploaded document.
+ */
+export const uploadDocumentToSupabase = async (employeeId, file, customName) => {
+  try {
+    const fileName = `${employeeId}-${customName}-${Date.now()}`; // Unique file name
+    const { data, error } = await supabase.storage
+      .from("documents")
+      .upload(fileName, file);
+
+    if (error) {
+      throw new Error("Error uploading document to Supabase: " + error.message);
+    }
+
+    // Generate a public URL for the uploaded file
+    const { publicUrl } = supabase.storage.from("documents").getPublicUrl(fileName);
+
+    return publicUrl;
+  } catch (error) {
+    console.error("Error in uploadDocumentToSupabase:", error.message);
+    throw error;
+  }
+};
+
+/**
  * Store employee data in Firestore.
  * @param {string} employeeId - Unique ID for the employee.
  * @param {object} data - Employee data to store.
@@ -70,6 +98,8 @@ export const retrieveEmployeeData = async (employeeId) => {
         address: data.address || "",
         dob: data.dob || "",
         degree: data.degree || "",
+        skills: data.skills || [], // Include skills
+        experiences: data.experiences || [], // Include experiences
       };
       return filteredData;
     } else {
@@ -101,6 +131,8 @@ export const listenToEmployeeData = (employeeId, callback) => {
           address: data.address || "",
           dob: data.dob || "",
           degree: data.degree || "",
+          skills: data.skills || [], // Include skills
+          experiences: data.experiences || [], // Include experiences
         };
         callback(filteredData);
       } else {

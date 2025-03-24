@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../../style/SkillsExperience.css";
+import { listenToEmployeeData, storeEmployeeData } from "../../services/firebaseEmployeeService";
 
 const SkillsExperience = () => {
+  const employeeId = sessionStorage.getItem("userPhone"); // Use phone number as unique ID
   const [skills, setSkills] = useState([]);
   const [skillInput, setSkillInput] = useState("");
   const [experiences, setExperiences] = useState([]);
@@ -14,17 +16,47 @@ const SkillsExperience = () => {
     remarks: "",
   });
 
+  // Real-Time Listener for Skills and Experience
+  useEffect(() => {
+    if (employeeId) {
+      const unsubscribe = listenToEmployeeData(employeeId, (data) => {
+        if (data) {
+          setSkills(data.skills || []);
+          setExperiences(data.experiences || []);
+        }
+      });
+      return () => unsubscribe(); // Cleanup listener on component unmount
+    }
+  }, [employeeId]);
+
   // Add Skill
-  const addSkill = () => {
-    if (skillInput.trim() !== "" && !skills.includes(skillInput)) {
-      setSkills([...skills, skillInput]);
+  const addSkill = async () => {
+    const trimmedSkill = skillInput.trim();
+    if (trimmedSkill !== "" && !skills.includes(trimmedSkill)) {
+      const updatedSkills = [...skills, trimmedSkill];
+      setSkills(updatedSkills);
       setSkillInput("");
+
+      // Save updated skills to Firebase
+      try {
+        await storeEmployeeData(employeeId, { skills: updatedSkills });
+      } catch (error) {
+        console.error("Error saving skills:", error);
+      }
     }
   };
 
   // Remove Skill
-  const removeSkill = (skillToRemove) => {
-    setSkills(skills.filter((skill) => skill !== skillToRemove));
+  const removeSkill = async (skillToRemove) => {
+    const updatedSkills = skills.filter((skill) => skill !== skillToRemove);
+    setSkills(updatedSkills);
+
+    // Save updated skills to Firebase
+    try {
+      await storeEmployeeData(employeeId, { skills: updatedSkills });
+    } catch (error) {
+      console.error("Error removing skill:", error);
+    }
   };
 
   // Handle Experience Input Change
@@ -33,11 +65,22 @@ const SkillsExperience = () => {
   };
 
   // Add Experience
-  const addExperience = () => {
-    if (newExperience.role && newExperience.company && newExperience.years) {
-      setExperiences([...experiences, newExperience]);
-      setNewExperience({ role: "", company: "", years: "", salary: "", remarks: "" });
-      setShowModal(false);
+  const addExperience = async () => {
+    if (!newExperience.role || !newExperience.company || !newExperience.years) {
+      alert("Please fill in all required fields (Role, Company, Years).");
+      return;
+    }
+
+    const updatedExperiences = [...experiences, newExperience];
+    setExperiences(updatedExperiences);
+    setNewExperience({ role: "", company: "", years: "", salary: "", remarks: "" });
+    setShowModal(false);
+
+    // Save updated experiences to Firebase
+    try {
+      await storeEmployeeData(employeeId, { experiences: updatedExperiences });
+    } catch (error) {
+      console.error("Error saving experiences:", error);
     }
   };
 
